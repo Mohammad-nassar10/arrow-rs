@@ -267,6 +267,10 @@ fn to_datatype(
                 &name,
                 child_type.unwrap_or(DataType::Null),
                 nullable,));
+            V.push(Field::new(
+                &name,
+                child_type.unwrap_or(DataType::Null),
+                nullable,));
             DataType::Struct(V)
         }
         dt => {
@@ -755,6 +759,7 @@ impl ArrowArray {
 
     /// the data_type as declared in the schema
     pub fn data_type(&self, child_type: Option<DataType>) -> Result<DataType> {
+        println!("ggg data_type() func, child_type = {:?}", child_type);
         to_datatype(self.schema.format(), child_type, self.schema.as_ref())
     }
 }
