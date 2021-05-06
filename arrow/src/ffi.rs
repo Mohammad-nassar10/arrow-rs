@@ -289,6 +289,7 @@ fn from_datatype(datatype: &DataType) -> Result<String> {
         DataType::Time64(TimeUnit::Nanosecond) => "ttn",
         DataType::List(_) => "+l",
         DataType::LargeList(_) => "+L",
+        DataType::Struct(_) => "+S",
         z => {
             return Err(ArrowError::CDataInterface(format!(
                 "The datatype \"{:?}\" is still not supported in Rust implementation",
@@ -560,6 +561,7 @@ impl ArrowArray {
         child_data: Vec<ArrowArray>,
         nullable: bool,
     ) -> Result<Self> {
+        println!("ggg Datatype: {:?}", data_type);
         let format = from_datatype(data_type)?;
         // * insert the null buffer at the start
         // * make all others `Option<Buffer>`.
