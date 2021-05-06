@@ -262,11 +262,12 @@ fn to_datatype(
                 .unwrap();
             // prevent a double free
             let name = ManuallyDrop::new(name);
-            DataType::Struct(Box::new(Field::new(
+            let mut V = Vec::new();
+            V.push(Field::new(
                 &name,
                 child_type.unwrap_or(DataType::Null),
-                nullable,
-            )))
+                nullable,));
+            DataType::Struct(V)
         }
         dt => {
             return Err(ArrowError::CDataInterface(format!(
