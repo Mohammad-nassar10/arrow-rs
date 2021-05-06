@@ -755,7 +755,7 @@ impl ArrowArray {
 
     /// the data_type as declared in the schema
     pub fn data_type(&self, child_type: Option<DataType>) -> Result<DataType> {
-        println!("ggg data_type() func, child_type = {:?}", child_type);
+        println!("ggg data_type() func, child_type = {:?}, schema = {:?}", child_type, self.schema);
         to_datatype(self.schema.format(), child_type, self.schema.as_ref())
     }
 }
