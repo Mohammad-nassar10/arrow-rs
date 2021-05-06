@@ -262,7 +262,7 @@ fn to_datatype(
                 .unwrap();
             // prevent a double free
             let name = ManuallyDrop::new(name);
-            println!("ggg in func to_datatype() schema = {:?},, children = {:?}", schema, *(schema.children));
+            println!("ggg in func to_datatype() schema = {:?},, children = {:?}", schema, unsafe{*(schema.children)});
             let mut V = Vec::new();
             V.push(Field::new(
                 &name,
