@@ -213,7 +213,7 @@ pub trait Array: fmt::Debug + Send + Sync + JsonEqual {
     ) -> Result<(*const ffi::FFI_ArrowArray, *const ffi::FFI_ArrowSchema)> {
         println!("ggg");
         let data = self.data().clone();
-        print_type_of(self);
+        print_type_of(&self);
         println!("Data = {:?}", data);
         let array = ffi::ArrowArray::try_from(data)?;
         Ok(ffi::ArrowArray::into_raw(array))
