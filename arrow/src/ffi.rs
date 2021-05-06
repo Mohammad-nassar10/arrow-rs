@@ -252,6 +252,22 @@ fn to_datatype(
                 nullable,
             )))
         }
+        "+S" => {
+            let nullable = schema.flags == 2;
+            // Safety
+            // Should be set as this is expected from the C FFI definition
+            debug_assert!(!schema.name.is_null());
+            let name = unsafe { CString::from_raw(schema.name as *mut c_char) }
+                .into_string()
+                .unwrap();
+            // prevent a double free
+            let name = ManuallyDrop::new(name);
+            DataType::Struct(Vec::new(Field::new(
+                &name,
+                child_type.unwrap_or(DataType::Null),
+                nullable,
+            )))
+        }
         dt => {
             return Err(ArrowError::CDataInterface(format!(
                 "The datatype \"{}\" is not supported in the Rust implementation",
