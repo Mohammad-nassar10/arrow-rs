@@ -207,6 +207,7 @@ pub trait Array: fmt::Debug + Send + Sync + JsonEqual {
     fn to_raw(
         &self,
     ) -> Result<(*const ffi::FFI_ArrowArray, *const ffi::FFI_ArrowSchema)> {
+        println!("ggg");
         let data = self.data().clone();
         let array = ffi::ArrowArray::try_from(data)?;
         Ok(ffi::ArrowArray::into_raw(array))
