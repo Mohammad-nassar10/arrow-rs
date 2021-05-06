@@ -262,7 +262,7 @@ fn to_datatype(
                 .unwrap();
             // prevent a double free
             let name = ManuallyDrop::new(name);
-            DataType::Struct(Vec::new(Field::new(
+            DataType::Struct(Box::new(Field::new(
                 &name,
                 child_type.unwrap_or(DataType::Null),
                 nullable,
