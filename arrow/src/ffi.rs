@@ -267,10 +267,6 @@ fn to_datatype(
                 &name,
                 child_type.unwrap_or(DataType::Null),
                 nullable,));
-            V.push(Field::new(
-                &name,
-                child_type.unwrap_or(DataType::Null),
-                nullable,));
             DataType::Struct(V)
         }
         dt => {
